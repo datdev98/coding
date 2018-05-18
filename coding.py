@@ -128,12 +128,6 @@ class Shannon(Coding):
             self.codex.append(Shannon.bin(sum, l))
             sum += self.source_units[i].probability
         
-    def __repr__(self):
-        result = {}
-        for i in range(len(self.source_units)):
-            result[self.source_units[i].name] = self.codex[i]
-        return str(result)
-        
 
     @staticmethod
     def bin(number, length):
@@ -143,7 +137,7 @@ class Shannon(Coding):
             number = number*2 - int(number*2)     
         return result 
         
-class Fano(Coding):
+class ShannonFano(Coding):
     def __init__(self, source_units):
         super().__init__(source_units)
         self.codex = [''] * len(source_units)
@@ -166,7 +160,7 @@ class Fano(Coding):
         return result
 
     def divide(self, array_of_probability, start, end):
-        i = Fano.find_middle(array_of_probability, start, end)
+        i = ShannonFano.find_middle(array_of_probability, start, end)
         for j in range(start, i):
             self.codex[j] += "0"
         for j in range(i, end):
